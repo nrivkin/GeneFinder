@@ -30,7 +30,14 @@ def get_complement(nucleotide):
     >>> get_complement('C')
     'G'
     """
-    # TODO: implement this
+    if nucleotide == 'A':
+        return('T')
+    elif nucleotide == 'T':
+        return('A')
+    elif nucleotide == 'C':
+        return('G')
+    elif nucleotide == 'G':
+        return('C')
     pass
 
 
@@ -45,7 +52,11 @@ def get_reverse_complement(dna):
     >>> get_reverse_complement("CCGCGTTCA")
     'TGAACGCGG'
     """
-    # TODO: implement this
+    length = len(dna)
+    rev_comp = ''
+    for i in range(length):
+        rev_comp = get_complement(dna[i]) + rev_comp
+    return rev_comp
     pass
 
 
@@ -160,6 +171,7 @@ def gene_finder(dna):
     """
     # TODO: implement this
     pass
+
 
 if __name__ == "__main__":
     import doctest
