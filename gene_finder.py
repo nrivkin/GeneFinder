@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-YOUR HEADER COMMENT HERE
+gene_finder.py
+includes functions for finding ORFs in genes
+needs amino_acids.py and load.py
 
-@author: YOUR NAME HERE
+All code is either from SoftDes class or personally written
+
+@nrivkin: Noah Rivkin
 
 """
 
@@ -212,7 +216,13 @@ def gene_finder(dna):
         dna: a DNA sequence
         returns: a list of all amino acid sequences coded by the sequence dna.
     """
-    # TODO: implement this
+    threshold = longest_ORF_noncoding(dna, 1500)
+    ORFs = find_all_ORFs_both_strands
+    sequences = []
+    for ORF in ORFs:
+        if len(ORF) > threshold:
+            sequences.append(coding_strand_to_AA(ORF))
+    return sequences
     pass
 
 
