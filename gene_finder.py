@@ -196,6 +196,13 @@ def coding_strand_to_AA(dna):
         >>> coding_strand_to_AA("ATGCCCGCTTT")
         'MPA'
     """
+    index = 0
+    a_strand = ''
+    while index < len(dna) - 2:
+        codon = dna[index] + dna[index + 1] + dna[index + 2]
+        a_strand = a_strand + aa_table[codon]
+        index += 3
+    return a_strand
     pass
 
 
