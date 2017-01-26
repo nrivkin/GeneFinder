@@ -73,7 +73,15 @@ def rest_of_ORF(dna):
     >>> rest_of_ORF("ATGAGATAGG")
     'ATGAGA'
     """
-    # TODO: implement this
+    sequence = ''
+    for index in range(len(dna)):
+        if index % 3 == 0 and index < len(dna) - 2:
+            codon = dna[index] + dna[index + 1] + dna[index + 2]
+            if codon in codons[10]:
+                return sequence
+            else:
+                sequence += codon
+    return dna
     pass
 
 
@@ -90,7 +98,17 @@ def find_all_ORFs_oneframe(dna):
     >>> find_all_ORFs_oneframe("ATGCATGAATGTAGATAGATGTGCCC")
     ['ATGCATGAATGTAGA', 'ATGTGCCC']
     """
-    # TODO: implement this
+    ORFs = []
+    index = 0
+    while index < len(dna) - 2:
+        codon = dna[index] + dna[index + 1] + dna[index + 2]
+        if codon in codons[3]:
+            ORF = rest_of_ORF(dna[index:len(dna)])
+            ORFs.append(ORF)
+            index += len(ORF)
+        else:
+            index += 3
+    return(ORFs)
     pass
 
 
@@ -107,7 +125,11 @@ def find_all_ORFs(dna):
     >>> find_all_ORFs("ATGCATGAATGTAG")
     ['ATGCATGAATGTAG', 'ATGAATGTAG', 'ATG']
     """
-    # TODO: implement this
+    all_ORFs = []
+    for index in range(3):
+        test = dna[index:len(dna)]
+        all_ORFs = all_ORFs + find_all_ORFs_oneframe(test)
+    return all_ORFs
     pass
 
 
@@ -120,7 +142,11 @@ def find_all_ORFs_both_strands(dna):
     >>> find_all_ORFs_both_strands("ATGCGAATGTAGCATCAAA")
     ['ATGCGAATG', 'ATGCTACATTCGCAT']
     """
-    # TODO: implement this
+    all_ORFs_both_strands = []
+    all_ORFs_both_strands = all_ORFs_both_strands + find_all_ORFs(dna)
+    second_strand = get_reverse_complement(dna)
+    all_ORFs_both_strands = all_ORFs_both_strands+find_all_ORFs(second_strand)
+    return all_ORFs_both_strands
     pass
 
 
@@ -130,7 +156,12 @@ def longest_ORF(dna):
     >>> longest_ORF("ATGCGAATGTAGCATCAAA")
     'ATGCTACATTCGCAT'
     """
-    # TODO: implement this
+    longest = ''
+    ORFs = find_all_ORFs_both_strands(dna)
+    for ORF in ORFs:
+        if len(ORF) > len(longest):
+            longest = ORF
+    return longest
     pass
 
 
@@ -141,7 +172,13 @@ def longest_ORF_noncoding(dna, num_trials):
         dna: a DNA sequence
         num_trials: the number of random shuffles
         returns: the maximum length longest ORF """
-    # TODO: implement this
+    longest = 0
+    for i in num_trials:
+        shuffled = shuffle_string(dna)
+        length = len(longest_ORF(shuffled))
+        if length > longest:
+            longest = length
+    return longest
     pass
 
 
@@ -159,7 +196,6 @@ def coding_strand_to_AA(dna):
         >>> coding_strand_to_AA("ATGCCCGCTTT")
         'MPA'
     """
-    # TODO: implement this
     pass
 
 
