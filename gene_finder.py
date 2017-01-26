@@ -177,7 +177,7 @@ def longest_ORF_noncoding(dna, num_trials):
         num_trials: the number of random shuffles
         returns: the maximum length longest ORF """
     longest = 0
-    for i in num_trials:
+    for i in range(num_trials):
         shuffled = shuffle_string(dna)
         length = len(longest_ORF(shuffled))
         if length > longest:
@@ -217,7 +217,7 @@ def gene_finder(dna):
         returns: a list of all amino acid sequences coded by the sequence dna.
     """
     threshold = longest_ORF_noncoding(dna, 1500)
-    ORFs = find_all_ORFs_both_strands
+    ORFs = find_all_ORFs_both_strands(dna)
     sequences = []
     for ORF in ORFs:
         if len(ORF) > threshold:
@@ -229,3 +229,7 @@ def gene_finder(dna):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+
+
+dna = load_seq("./data/X73525.fa")
+gene_finder(dna)
