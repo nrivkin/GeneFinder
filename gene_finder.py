@@ -42,7 +42,6 @@ def get_complement(nucleotide):
         return('G')
     elif nucleotide == 'G':
         return('C')
-    pass
 
 
 def get_reverse_complement(dna):
@@ -61,7 +60,6 @@ def get_reverse_complement(dna):
     for i in range(length):
         rev_comp = get_complement(dna[i]) + rev_comp
     return rev_comp
-    pass
 
 
 def rest_of_ORF(dna):
@@ -86,7 +84,6 @@ def rest_of_ORF(dna):
             else:
                 sequence += codon
     return dna
-    pass
 
 
 def find_all_ORFs_oneframe(dna):
@@ -113,7 +110,6 @@ def find_all_ORFs_oneframe(dna):
         else:
             index += 3
     return(ORFs)
-    pass
 
 
 def find_all_ORFs(dna):
@@ -134,7 +130,6 @@ def find_all_ORFs(dna):
         test = dna[index:len(dna)]
         all_ORFs = all_ORFs + find_all_ORFs_oneframe(test)
     return all_ORFs
-    pass
 
 
 def find_all_ORFs_both_strands(dna):
@@ -151,7 +146,6 @@ def find_all_ORFs_both_strands(dna):
     second_strand = get_reverse_complement(dna)
     all_ORFs_both_strands = all_ORFs_both_strands+find_all_ORFs(second_strand)
     return all_ORFs_both_strands
-    pass
 
 
 def longest_ORF(dna):
@@ -163,10 +157,9 @@ def longest_ORF(dna):
     longest = ''
     ORFs = find_all_ORFs_both_strands(dna)
     for ORF in ORFs:
-        if len(ORF) > len(longest):
+        if len(ORF) > len(longest):s
             longest = ORF
     return longest
-    pass
 
 
 def longest_ORF_noncoding(dna, num_trials):
@@ -183,7 +176,6 @@ def longest_ORF_noncoding(dna, num_trials):
         if length > longest:
             longest = length
     return longest
-    pass
 
 
 def coding_strand_to_AA(dna):
@@ -207,7 +199,6 @@ def coding_strand_to_AA(dna):
         a_strand = a_strand + aa_table[codon]
         index += 3
     return a_strand
-    pass
 
 
 def gene_finder(dna):
@@ -223,7 +214,6 @@ def gene_finder(dna):
         if len(ORF) > threshold:
             sequences.append(coding_strand_to_AA(ORF))
     return sequences
-    pass
 
 
 if __name__ == "__main__":
