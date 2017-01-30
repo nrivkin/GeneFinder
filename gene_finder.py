@@ -34,7 +34,7 @@ def get_complement(nucleotide):
     >>> get_complement('C')
     'G'
     """
-    if nucleotide == 'A':
+    if nucleotide == 'A':  # swaps nucleotide for compliment
         return('T')
     elif nucleotide == 'T':
         return('A')
@@ -56,9 +56,9 @@ def get_reverse_complement(dna):
     'TGAACGCGG'
     """
     length = len(dna)
-    rev_comp = ''
+    rev_comp = ''  # empty string
     for i in range(length):
-        rev_comp = get_complement(dna[i]) + rev_comp
+        rev_comp = get_complement(dna[i]) + rev_comp  # because of order the new complement is added to the front
     return rev_comp
 
 
@@ -77,9 +77,9 @@ def rest_of_ORF(dna):
     """
     sequence = ''
     for index in range(len(dna)):
-        if index % 3 == 0 and index < len(dna) - 2:
+        if index % 3 == 0 and index < len(dna) - 2:  # %3 finds the start of codons
             codon = dna[index] + dna[index + 1] + dna[index + 2]
-            if codon in codons[10]:
+            if codon in codons[10]:  # codons[10] contains the stop codons
                 return sequence
             else:
                 sequence += codon
@@ -101,7 +101,7 @@ def find_all_ORFs_oneframe(dna):
     """
     ORFs = []
     index = 0
-    while index < len(dna) - 2:
+    while index < len(dna) - 2:  # the -2 makes sure the progam doesn't try to read from null
         codon = dna[index] + dna[index + 1] + dna[index + 2]
         if codon in codons[3]:
             ORF = rest_of_ORF(dna[index:len(dna)])
@@ -126,7 +126,7 @@ def find_all_ORFs(dna):
     ['ATGCATGAATGTAG', 'ATGAATGTAG', 'ATG']
     """
     all_ORFs = []
-    for index in range(3):
+    for index in range(3):  # iterates over possible frames
         test = dna[index:len(dna)]
         all_ORFs = all_ORFs + find_all_ORFs_oneframe(test)
     return all_ORFs
