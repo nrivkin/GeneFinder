@@ -34,14 +34,7 @@ def get_complement(nucleotide):
     >>> get_complement('C')
     'G'
     """
-    if nucleotide == 'A':  # swaps nucleotide for compliment
-        return('T')
-    elif nucleotide == 'T':
-        return('A')
-    elif nucleotide == 'C':
-        return('G')
-    elif nucleotide == 'G':
-        return('C')
+    return{'C':'G', 'G':'C', 'A':'T', 'T':'A'}[nucleotide]
 
 
 def get_reverse_complement(dna):
