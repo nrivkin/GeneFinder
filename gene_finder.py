@@ -150,7 +150,7 @@ def longest_ORF(dna):
     longest = ''
     ORFs = find_all_ORFs_both_strands(dna)
     for ORF in ORFs:
-        if len(ORF) > len(longest):s
+        if len(ORF) > len(longest):
             longest = ORF
     return longest
 

@@ -18,8 +18,8 @@ https://en.wikipedia.org/wiki/Longest_common_substring_problem
 import random
 from amino_acids import aa, codons, aa_table   # you may find these useful
 import load
-# from gene_finder import get_complement, get_reverse_complement, find_all_ORFs
-# from gene_finder import find_all_ORFs_oneframe, find_all_ORFs_both_strands, coding_strand_to_AA # these are useful, though possibly not overly efficient
+from gene_finder import get_complement, get_reverse_complement, find_all_ORFs
+from gene_finder import find_all_ORFs_oneframe, find_all_ORFs_both_strands, coding_strand_to_AA # these are useful, though possibly not overly efficient
 
 
 # Use find_all_ORFs and coding_strand_to_AA to find possible, then compare?
@@ -65,6 +65,17 @@ def find_common_sub(str1,str2):
         common = common + str1[longest_loc - k]
     return common
 
+
+substrings = []
 nitrogenase = load_nitrogenase_seq()
+nitrogenase = nitrogenase.replace('\n','')
+nit_strand = gene_finder(nitrogenase)
 metagenome = load_metagenome()
-find_common_sub(nitrogenase, metagenome[90][1])
+# for i in range(10):
+#     meta_strands = find_all_ORFs_both_strands(metagenome[i][1])
+#     aa_meta_strands = []
+#     for strand in meta_strands:
+#          aa_meta_strands.append(coding_strand_to_AA(strand))
+#     for j in range(len(meta_strands)):
+#         substrings.append(find_common_sub(nit_strand[0], aa_meta_strands[j]))
+substrings
